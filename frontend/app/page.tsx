@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Skyline from "@/components/Skyline";
-import Stations, { FALLBACK_PACKS } from "@/components/Stations";
+import Garden from "@/components/Garden";
+import SeedPackets, { FALLBACK_PACKS } from "@/components/Stations";
 import { createRoom, fetchPacks, PackMeta, roomExists } from "@/lib/api";
 import { savedName, saveName } from "@/lib/identity";
 import { useClientValue } from "@/lib/useClientValue";
+
+const DEMO = [
+  { id: "a", name: "you", color: "#ff7d9c" },
+  { id: "b", name: "a friend", color: "#ffcf4a" },
+  { id: "c", name: "another", color: "#7fd0f5" },
+];
 
 export default function Home() {
   const router = useRouter();
@@ -40,13 +46,12 @@ export default function Home() {
   const ready = name.trim().length > 0;
 
   async function make() {
-    if (!ready) return setError("Pick a name first, so your friends know who's who.");
+    if (!ready) return setError("Add your name first so your friends know which flower is you.");
     setBusy("make");
     setError(null);
     try {
       saveName(name);
-      const c = await createRoom();
-      router.push(`/room/${c}`);
+      router.push(`/room/${await createRoom()}`);
     } catch (e) {
       setError((e as Error).message);
       setBusy(null);
@@ -55,13 +60,13 @@ export default function Home() {
 
   async function join(e: React.FormEvent) {
     e.preventDefault();
-    if (!ready) return setError("Pick a name first, so your friends know who's who.");
+    if (!ready) return setError("Add your name first so your friends know which flower is you.");
     const c = code.trim().toUpperCase();
     if (c.length !== 4) return setError("Room codes are 4 letters.");
     setBusy("join");
     setError(null);
     try {
-      if (!(await roomExists(c))) throw new Error(`No room called ${c}. Check the code with whoever made it.`);
+      if (!(await roomExists(c))) throw new Error(`There's no room ${c}. Check the code with whoever made it.`);
       saveName(name);
       router.push(`/room/${c}`);
     } catch (e) {
@@ -72,79 +77,62 @@ export default function Home() {
 
   return (
     <main>
-      <div className="scene">
-        <Skyline signal={server === "up" ? "idle" : "thinking"} />
-        <div className="scene-top">
-          <h1 className="logo">Telepathy</h1>
-          <span className="small muted" role="status">
-            {server === "up" ? "tower online" : server === "waking" ? "waking the tower…" : "tower offline"}
-          </span>
+      <div className="garden-wrap">
+        <Garden plants={DEMO} mood="reveal" links={[["a", "b"], ["b", "c"]]} />
+        <div className="garden-bar">
+          <h1 className="wordmark-big">Telepathy</h1>
         </div>
       </div>
 
-      <div className="wrap console">
-        <div className="note" style={{ marginBottom: 22 }}>
-          <p style={{ margin: 0, fontSize: 24 }}>
-            Everyone sees half a word, like <b>break ____</b>. You each secretly finish it.
-            If you all write <b>dance</b>, that&apos;s telepathy.
+      <section className="layer">
+        <div className="inner stack">
+          <p className="lede">
+            Everyone sees half a word, like <b>break ____</b>. You each finish it in secret.
+            When your answers match, your roots light up.
           </p>
-        </div>
-
-        <section className="panel" aria-labelledby="go">
-          <h2 id="go">Get a room</h2>
-          <label className="lbl" htmlFor="name">Your name</label>
-          <input
-            id="name"
-            className="field"
-            maxLength={16}
-            autoComplete="nickname"
-            placeholder="e.g. Kavya"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <div className="row" style={{ marginTop: 16 }}>
-            <button className="btn btn-go" onClick={make} disabled={busy !== null}>
-              {busy === "make" ? "Opening…" : "Start a room"}
+          <div>
+            <label className="lbl" htmlFor="name">Your name</label>
+            <input id="name" className="field" maxLength={16} autoComplete="nickname" placeholder="Kavya" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="row" style={{ gap: 16 }}>
+            <button className="btn btn-gold btn-big" onClick={make} disabled={busy !== null}>
+              {busy === "make" ? "Making a room…" : "Make a room"}
             </button>
-            <span className="muted">or</span>
-            <form onSubmit={join} className="row">
-              <input
-                aria-label="Room code"
-                className="field field-code"
-                maxLength={4}
-                placeholder="CODE"
-                value={code}
-                onChange={(e) => setCode(e.target.value.replace(/[^a-z]/gi, "").toUpperCase())}
-              />
-              <button className="btn" disabled={busy !== null}>
-                {busy === "join" ? "Joining…" : "Join"}
-              </button>
+            <form onSubmit={join} className="row" style={{ gap: 8 }}>
+              <input aria-label="Room code" className="field field-code" maxLength={4} placeholder="code" value={code} onChange={(e) => setCode(e.target.value.replace(/[^a-z]/gi, "").toUpperCase())} />
+              <button className="btn" disabled={busy !== null}>{busy === "join" ? "Joining…" : "Join"}</button>
             </form>
           </div>
-          {error && <p role="alert" style={{ color: "var(--sunset)", marginBottom: 0 }}>{error}</p>}
-          {server === "down" && (
-            <p className="muted small" style={{ marginBottom: 0 }}>
-              The game server isn&apos;t answering. If it&apos;s on a free host it may be asleep. Give it a minute and refresh.
+          {error && <p role="alert" style={{ color: "var(--petal)", margin: 0 }}>{error}</p>}
+          {server !== "up" && (
+            <p className="muted small" role="status" style={{ margin: 0 }}>
+              {server === "waking"
+                ? "Waking up the game server. On a free host this can take up to a minute."
+                : "The game server isn't answering. Give it a minute and refresh."}
             </p>
           )}
-        </section>
+        </div>
+      </section>
 
-        <section className="panel" aria-labelledby="how">
-          <h2 id="how">How a round goes</h2>
+      <section className="layer">
+        <div className="inner">
+          <h2>How a round works</h2>
           <ol className="steps">
-            <li><span>Everyone in the room sees the same half, say <b>make ____</b></span></li>
-            <li><span>Each of you locks in an ending without talking. Sense? Up? A wish?</span></li>
-            <li>Reveal. Everyone matching is a meld (3 pts). A pair matching is 1 pt.</li>
-            <li>Syncing on a rarer answer earns a deep-cut bonus. Three melds in a row starts a streak.</li>
+            <li>Everyone in the room sees the same half: <b>make ____</b></li>
+            <li>Each of you locks in an ending without talking. Sense? Up? A wish?</li>
+            <li>If everyone matches you score 3 points. Each matching pair scores 1.</li>
+            <li>Matching on a less obvious answer earns a bonus point. So do streaks of three.</li>
           </ol>
-          <p className="muted small" style={{ marginBottom: 0 }}>Best with 2–3 people, room for 6. Send friends the room code or link.</p>
-        </section>
+          <p className="muted small" style={{ marginBottom: 0 }}>Best with 2 or 3 people. A room holds up to 6.</p>
+        </div>
+      </section>
 
-        <section className="panel" aria-labelledby="st">
-          <h2 id="st">On the dial</h2>
-          <Stations packs={packs} readOnly />
-        </section>
-      </div>
+      <section className="layer">
+        <div className="inner">
+          <h2>Word packs</h2>
+          <SeedPackets packs={packs} readOnly />
+        </div>
+      </section>
     </main>
   );
 }

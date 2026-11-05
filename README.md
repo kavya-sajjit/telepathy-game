@@ -3,8 +3,9 @@
 Think you and your twin are locked in? Everyone in a room sees half a word, for example `break ____`.
 You each secretly type the other half. If you all write **dance**, that's telepathy.
 
-Built for 2–3 players, with room for 6. Pixel-city look, rooms with share links, a server-side clock,
-and four word packs mined from real lexical data.
+Built for 2–3 players, with room for 6. Each player is a flower in a shared garden bed, and when your
+answers match, your roots light up underground. Rooms with share links, a server-side clock, and
+four word packs mined from real lexical data.
 
 ```
  frontend/  Next.js 16 (App Router) — home, room lobby, rounds, reveal, results

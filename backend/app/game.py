@@ -11,7 +11,7 @@ from .packs import DIFFICULTIES, Prompt, library
 
 MAX_PLAYERS = 6
 NAME_MAX = 16
-COLORS = ["#ff9f43", "#5ee6c8", "#ff6b9d", "#8c7bff", "#ffd93d", "#4dabf7"]
+COLORS = ["#ff7d9c", "#ffcf4a", "#7fd0f5", "#b99bff", "#ff9b54", "#93dc84"]
 CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ"  # no I/O, they look like 1/0
 REACTIONS = {"🔥", "😂", "🤯", "🫶", "😭", "👀", "🧠", "✨"}
 

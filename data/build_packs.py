@@ -336,9 +336,9 @@ def main() -> None:
     # Pack 1 & 2: compounds
     for pid, fname, side, title, tagline, example in [
         ("front", "front_stems.txt", "front", "Front Halves", "One word in. Finish the compound.",
-         ["sun ____", "flower · shine · set · glasses"]),
+         ["sun ____", "flower, shine, set, glasses"]),
         ("back", "back_stems.txt", "back", "Back Halves", "The ending's fixed. What comes first?",
-         ["____ ball", "foot · snow · eye · meat"]),
+         ["____ ball", "foot, snow, eye, meat"]),
     ]:
         prompts = []
         for stem in read_list(fname):
@@ -362,7 +362,7 @@ def main() -> None:
     tierize(prompts)
     packs.append({"id": "phrases", "group": "Phrases", "title": "Verb Phrases",
                   "tagline": "A verb walks into a phrase…",
-                  "example": ["make ____", "sense · up · it · a wish"], "prompts": prompts})
+                  "example": ["make ____", "sense, up, it, a wish"], "prompts": prompts})
 
     # Pack 4: idioms
     prompts = []
@@ -375,7 +375,7 @@ def main() -> None:
     tierize(prompts)
     packs.append({"id": "idioms", "group": "Idioms", "title": "Idioms",
                   "tagline": "Finish the saying. Same as your partner.",
-                  "example": ["under the ____", "weather · radar · table · sun"], "prompts": prompts})
+                  "example": ["under the ____", "weather, radar, table, sun"], "prompts": prompts})
 
     if args.report:
         for pk in packs:

@@ -146,9 +146,9 @@ class Library:
     def catalog(self) -> list[dict]:
         metas = [p.meta() for p in self.packs.values()]
         total = sum(m["count"] for m in metas)
-        metas.append({"id": "mix", "group": "Shuffle", "title": "Mixtape",
-                      "tagline": "A bit of everything. Chaos, lovingly curated.",
-                      "example": ["??? ____", "compounds · phrases · idioms"], "count": total,
+        metas.append({"id": "mix", "group": "Shuffle", "title": "Mixed Bag",
+                      "tagline": "A bit of everything.",
+                      "example": ["anything ____", "all four packs"], "count": total,
                       "byDifficulty": {d: sum(m["byDifficulty"][d] for m in metas) for d in DIFFICULTIES}})
         return metas
 
