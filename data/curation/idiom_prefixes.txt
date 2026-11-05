@@ -1,0 +1,40 @@
+# Idiom / saying openers. Prompt shown as "prefix ____".
+# Picked from the auto-discovered candidates (run build_packs.py --report).
+all over
+at the
+blow your
+by the
+change of
+come to
+down the
+field of
+for the
+get the
+give the
+go to
+have a
+hit the
+in a
+in the
+in your
+keep your
+off the
+on a
+on the
+on your
+once in a
+out of the
+over the
+piece of
+point of
+put your
+sense of
+state of
+take a
+take the
+time of
+turn a
+turn the
+under the
+up to
+waste of

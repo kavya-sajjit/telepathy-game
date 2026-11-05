@@ -1,0 +1,67 @@
+# Everyday phrases and idioms that the corpora miss.
+# Kept short on purpose: the bulk comes from WordNet + MAGPIE.
+make a wish
+make it happen
+make or break
+make a difference
+make friends
+make a mess
+make a scene
+make an effort
+break the ice
+break the rules
+break a leg
+break a record
+break the news
+break the silence
+take a break
+take a selfie
+take a nap
+take it easy
+take a hint
+over the moon
+over the top
+over the hill
+under the radar
+under the weather
+under pressure
+on the fence
+on the rocks
+on the ball
+on the house
+on the go
+on the same page
+on cloud nine
+in the bag
+in the loop
+in the dark
+in the zone
+in the nick of time
+out of the blue
+out of the box
+out of the woods
+hit the sack
+hit the books
+hit the jackpot
+hit the gym
+once in a blue moon
+once in a lifetime
+once in a while
+piece of cake
+waste of time
+waste of money
+sense of humour
+change of heart
+change of plans
+time of my life
+spill the beans
+spill the tea
+let it go
+let it be
+go big or go home
+go with the flow
+call it a day
+keep calm
+keep it real
+get a life
+get the hang of it
