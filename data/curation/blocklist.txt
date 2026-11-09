@@ -1,0 +1,100 @@
+# Answers to drop. Formats:
+#   word            -> drop this answer part everywhere
+#   stem:part       -> drop only under that prompt (e.g. star:red for "starred")
+#   full display    -> drop that exact compound/phrase
+#
+# --- not family friendly / identity-based
+cock
+fucker
+shit
+crap
+piss
+ass
+butt
+pecker up
+gay man
+black man
+black woman
+white man
+white woman
+hand job
+house of prostitution
+house of ill repute
+damn
+hell
+# --- false splits the filters let through (suffixes that happen to be words)
+grand:eur
+free:dom
+star:dom
+star:red
+star:let
+star:ring
+book:let
+cup:ping
+pop:ping
+hand:ling
+bed:ding
+war:wick
+hand:led
+master:fully
+home:spun
+heart:wood
+land:on
+wall:in
+sleep:in
+home:in
+work:in
+work:on
+work:at
+step:in
+check:in
+pay:pal
+water:colour
+on:time
+in:time
+in:case
+in:line
+in:style
+at:work
+on:board
+on:paper
+on:line
+on:fire
+on:guard
+off:guard
+in:mate
+in:side
+out:side
+up:side
+on:side
+in:land
+up:land
+under:way
+any:way
+under:fire
+very
+day:return
+down:syndrome
+key:west
+fresh:water
+fri
+tues
+thurs
+mon
+wed
+# --- too technical / obscure for a party game
+free radical
+face recognition
+light intensity
+cross section
+time series
+time constant
+time value
+land tenure
+gold leaf
+counter security
+counter stock
+sense of meeting
+on the game
+over:all
+in:mate
